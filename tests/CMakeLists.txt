@@ -15,23 +15,23 @@ file(
 )
 
 add_executable(
-    btm_tests
+    brasstacks-math-tests
 	${TESTS_SOURCE}
 )
 
 target_include_directories(
-    btm_tests PUBLIC
+    brasstacks-math-tests PUBLIC
     ${CMAKE_SOURCE_DIR}
 )
 
 target_link_libraries(
-	btm_tests PUBLIC
+	brasstacks-math-tests PUBLIC
 	brasstacks_math
     Catch2::Catch2WithMain
 )
 
 set_target_properties(
-	btm_tests PROPERTIES
+	brasstacks-math-tests PROPERTIES
 	CXX_STANDARD 20
 	CXX_STANDARD_REQUIRED ON
 

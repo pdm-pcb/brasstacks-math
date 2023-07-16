@@ -57,7 +57,7 @@
             "name": "linux-release-gcc",
             "inherits": [
                 "release-base",
-                "linux-base"
+                "linux-base-gcc"
             ],
             "displayName": "Linux Release GCC"
         },
