@@ -7,9 +7,9 @@
 
 #include "brasstacks/math/math.hpp"
 
-static uint32_t constexpr TEST_REPEATS = 3u;
+static uint32_t constexpr TEST_REPEATS = 10u;
 
-inline auto random_vec3(float const min = -1.0f, float const max = 1.0f) {
+inline auto random_vec3(float const min = -10.0f, float const max = 10.0f) {
     return btx::math::Vec3(
         Catch::Generators::random(min, max).get(),
         Catch::Generators::random(min, max).get(),

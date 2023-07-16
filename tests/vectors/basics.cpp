@@ -26,6 +26,18 @@ TEST_CASE("Vector structure", "[vectors][vector basics]") {
     REQUIRE(a == Vec3{ 2, 1, 3 });
 }
 
+TEST_CASE("Vector equality", "[vectors][vector basics]") {
+    REQUIRE(Vec3::unit_x == Vec3::unit_x);
+    REQUIRE(Vec3::unit_y == Vec3::unit_y);
+    REQUIRE(Vec3::unit_z == Vec3::unit_z);
+    REQUIRE(Vec3::zero == Vec3::zero);
+
+    for(uint32_t i = 0u; i < TEST_REPEATS; ++i) {
+        Vec3 const a = random_vec3();
+        REQUIRE(a == a);
+    }
+}
+
 TEST_CASE("Vector addition", "[vectors][vector basics]") {
     for(uint32_t i = 0u; i < TEST_REPEATS; ++i) {
         Vec3 const a = random_vec3();
@@ -55,15 +67,17 @@ TEST_CASE("Vector addition", "[vectors][vector basics]") {
 }
 
 TEST_CASE("Vector subtraction", "[vectors][vector basics]") {
-    Vec3 const a(0, 9, -3);
-    Vec3 const b(2, -1, 6);
-    Vec3 const c(-2, 10, -9);
-    Vec3 d = a;
+    for(uint32_t i = 0u; i < TEST_REPEATS; ++i) {
+        Vec3 const a = random_vec3();
+        Vec3 const b = random_vec3();
+        Vec3 const c = a - b;
+        Vec3 d = a;
 
-    REQUIRE(a - b == c);            // Basic operation
-    REQUIRE(a + (-b) == c);         // Negation operator
-    REQUIRE((d -= b) == c);         // Assignment operator
-    REQUIRE(a - a == Vec3::zero);   // A vector minus itself is zero
+        REQUIRE(a - b == c);            // Basic operation
+        REQUIRE(a + (-b) == c);         // Negation operator
+        REQUIRE((d -= b) == c);         // Assignment operator
+        REQUIRE(a - a == Vec3::zero);   // A vector minus itself is zero
+    }
 }
 
 TEST_CASE("Vector length", "[vectors][vector basics]") {

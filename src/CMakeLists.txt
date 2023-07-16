@@ -1,16 +1,16 @@
 file(
-    GLOB_RECURSE BTM_SOURCE
+    GLOB_RECURSE LIBRARY_SOURCE
     "${CMAKE_SOURCE_DIR}/src/*.cpp"
 )
 file(
-    GLOB_RECURSE BTM_HEADERS
+    GLOB_RECURSE LIBRARY_HEADERS
     "${CMAKE_SOURCE_DIR}/include/brasstacks_math/*.hpp"
 )
 
 add_library(
     brasstacks_math STATIC
-	${BTM_SOURCE}
-    ${BTM_HEADERS}
+	${LIBRARY_SOURCE}
+    ${LIBRARY_HEADERS}
 )
 
 target_include_directories(

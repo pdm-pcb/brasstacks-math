@@ -14,9 +14,15 @@ file(
     "*.cpp"
 )
 
+file(
+    GLOB_RECURSE TESTS_HEADERS
+    "*.hpp"
+)
+
 add_executable(
     brasstacks-math-tests
 	${TESTS_SOURCE}
+	${TESTS_HEADERS}
 )
 
 target_include_directories(
