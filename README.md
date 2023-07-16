@@ -1,2 +1,2 @@
 # brasstacks-math
-3D math library for real time rendering
+Simple linear algebra library for learning and video games
