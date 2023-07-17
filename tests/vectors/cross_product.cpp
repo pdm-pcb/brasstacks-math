@@ -83,7 +83,7 @@ TEST_CASE("Cross product is associative with scalar multiplication",
     }
 }
 
-TEST_CASE("Crossing parallel vectors", "[vectors][cross product]") {
+TEST_CASE("Crossing parallel vectors yields zero", "[vectors][cross product]") {
     for(uint32_t i = 0u; i < TEST_REPEATS; ++i) {
         Vec3 a = random_vec3();
 

@@ -3,7 +3,7 @@
 using namespace btx::math;
 using namespace Catch::Matchers;
 
-TEST_CASE("Am I in front or behind the NPC?", "[vectors][exercises]") {
+TEST_CASE("Am I in front or behind the NPC?", "[vectors][examples]") {
     // The NPC is at the origin, looking "up" along the Y axis
     Vec3 const npc_pos = Vec3::zero;
     Vec3 const npc_fwd = Vec3::unit_y;
@@ -30,7 +30,7 @@ TEST_CASE("Am I in front or behind the NPC?", "[vectors][exercises]") {
     REQUIRE_THAT(dot(npc_fwd, npc_to_player), WithinAbs(0.0f, epsilon));
 }
 
-TEST_CASE("NPC vision cone", "[vectors][exercises]") {
+TEST_CASE("NPC vision cone", "[vectors][examples]") {
     // The NPC is at the origin, looking "up" along the Y axis, and has a
     // 150-degree horizontal field of view
     Vec3 const npc_pos = Vec3::zero;
@@ -75,4 +75,33 @@ TEST_CASE("NPC vision cone", "[vectors][exercises]") {
     npc_fwd = -Vec3::unit_y;
     REQUIRE(dot(npc_fwd, npc_to_player) >= cos_half_fov);
     REQUIRE(dot(npc_fwd, npc_to_player) >= cos_tiny_fov);
+}
+
+TEST_CASE("Finding the normal to a surface", "[vectors][examples]") {
+    // Three points which can define the XY plane
+    Vec3 a(1.0f, 1.0f, 0.0f);
+    Vec3 b(-3.0f, 6.0f, 0.0f);
+    Vec3 c(0.0f, -2.0f, 0.0f);
+
+    // And the normal to that plane is the Z unit vector
+    Vec3 normal = normalize(cross(b - a, c - a));
+    REQUIRE(normal == Vec3::unit_z);
+
+    // Define the XZ plane with similar points
+    a = { 1.0f, 0.0f, 1.0f };
+    b = { 0.0f, 0.0f, -2.0f };
+    c = { -3.0f, 0.0f, 6.0f };
+
+    // And the normal to that plane is the Y unit vector
+    normal = normalize(cross(b - a, c - a));
+    REQUIRE(normal == Vec3::unit_y);
+
+    // Finally, the YZ plane
+    a = { 0.0f, 1.0f, 1.0f };
+    b = { 0.0f, -3.0f, 6.0f };
+    c = { 0.0f, 0.0f, -2.0f };
+
+    // And the normal to that plane is the X unit vector
+    normal = normalize(cross(b - a, c - a));
+    REQUIRE(normal == Vec3::unit_x);
 }
