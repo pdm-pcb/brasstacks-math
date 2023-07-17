@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.20) # This minimum requirement allows us to not
 project(
     brasstacks_math
     VERSION 0.1.0
-    DESCRIPTION "3D math library for real time rendering."
+    DESCRIPTION "Simple linear algebra library for learning and video games"
     LANGUAGES CXX C
 )
 
