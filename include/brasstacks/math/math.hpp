@@ -40,24 +40,48 @@ static float constexpr one_eighty_over_pi = 180.0f / pi;
 }
 
 // =============================================================================
-// Vector operations
-[[nodiscard]] float length_squared(Vec2 const &v);
-[[nodiscard]] float length(Vec2 const &v);
+// Vector length
+[[nodiscard]] inline float length_squared(Vec2 const &v) {
+    return (v.x * v.x) + (v.y * v.y);
+}
+[[nodiscard]] inline float length_squared(Vec3 const &v) {
+    return (v.x * v.x) + (v.y * v.y) + (v.z * v.z);
+}
+[[nodiscard]] inline float length_squared(Vec4 const &v) {
+    return (v.x * v.x) + (v.y * v.y) + (v.z * v.z) + (v.w * v.w);
+}
 
-[[nodiscard]] float length_squared(Vec3 const &v);
-[[nodiscard]] float length(Vec3 const &v);
+template <typename Vector>
+[[nodiscard]] inline float length(Vector const &v) {
+    float length_sq = length_squared(v);
 
-[[nodiscard]] float length_squared(Vec4 const &v);
-[[nodiscard]] float length(Vec4 const &v);
+    // If we're dealing with the zero vector, return zero
+    if(std::abs(length_sq) < epsilon) {
+        return 0.0f;
+    }
 
+    // If it's a unit vector, skip the square root calculation
+    if(std::abs(length_sq - 1.0f) < epsilon) {
+        return length_sq;
+    }
+
+    return std::sqrt(length_sq);
+}
+
+// =============================================================================
+// Normalizing
 [[nodiscard]] Vec2 normalize(Vec2 const &v);
 [[nodiscard]] Vec3 normalize(Vec3 const &v);
 [[nodiscard]] Vec4 normalize(Vec4 const &v);
 
+// =============================================================================
+// Dot Product
 [[nodiscard]] float dot(Vec2 const &a, Vec2 const &b);
 [[nodiscard]] float dot(Vec3 const &a, Vec3 const &b);
 [[nodiscard]] float dot(Vec4 const &a, Vec4 const &b);
 
+// =============================================================================
+// Cross Product
 [[nodiscard]] Vec3 cross(Vec3 const &a, Vec3 const &b);
 
 } // namespace btx::math
