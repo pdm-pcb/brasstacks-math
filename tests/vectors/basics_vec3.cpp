@@ -3,7 +3,7 @@
 using namespace btx::math;
 using namespace Catch::Matchers;
 
-TEST_CASE("Vector structure", "[vectors][vector basics]") {
+TEST_CASE("Vector structure", "[vectors][vector basics][Vec3]") {
     Vec3 a; // Test the default constructor
 
     // Accessing by member name
@@ -35,7 +35,7 @@ TEST_CASE("Vector structure", "[vectors][vector basics]") {
     REQUIRE_THAT(a[2], WithinAbs(1.0f, epsilon));
 }
 
-TEST_CASE("Vector equality", "[vectors][vector basics]") {
+TEST_CASE("Vector equality", "[vectors][vector basics][Vec3]") {
     // Unit vectors are distinct
     REQUIRE(Vec3::unit_x != Vec3::unit_y);
     REQUIRE(Vec3::unit_x != Vec3::unit_z);
@@ -51,7 +51,7 @@ TEST_CASE("Vector equality", "[vectors][vector basics]") {
     }
 }
 
-TEST_CASE("Vector addition", "[vectors][vector basics]") {
+TEST_CASE("Vector addition", "[vectors][vector basics][Vec3]") {
     // Start with fixed values
     Vec3 a(0.0f, 9.0f, -3.0f);
     Vec3 b(2.0f, -1.0f, 6.0f);
@@ -101,7 +101,7 @@ TEST_CASE("Vector addition", "[vectors][vector basics]") {
     }
 }
 
-TEST_CASE("Vector subtraction", "[vectors][vector basics]") {
+TEST_CASE("Vector subtraction", "[vectors][vector basics][Vec3]") {
     // Start with fixed values
     Vec3 a(0.0f, 9.0f, -3.0f);
     Vec3 b(2.0f, -1.0f, 6.0f);
@@ -127,7 +127,7 @@ TEST_CASE("Vector subtraction", "[vectors][vector basics]") {
     }
 }
 
-TEST_CASE("Vector length", "[vectors][vector basics]") {
+TEST_CASE("Vector length", "[vectors][vector basics][Vec3]") {
     // Test the unit and zero vectors
     REQUIRE_THAT(length(Vec3::unit_x), WithinAbs(1.0f, epsilon));
     REQUIRE_THAT(length(Vec3::unit_y), WithinAbs(1.0f, epsilon));
@@ -159,7 +159,7 @@ TEST_CASE("Vector length", "[vectors][vector basics]") {
     REQUIRE_THAT(length_squared(a), WithinAbs(a_length_squared, epsilon));
 }
 
-TEST_CASE("Vector normalization", "[vectors][vector basics]") {
+TEST_CASE("Vector normalization", "[vectors][vector basics][Vec3]") {
     // The unit vectors won't change
     REQUIRE(normalize(Vec3::unit_x) == Vec3::unit_x);
     REQUIRE(normalize(Vec3::unit_y) == Vec3::unit_y);
@@ -174,7 +174,7 @@ TEST_CASE("Vector normalization", "[vectors][vector basics]") {
     }
 }
 
-TEST_CASE("Vector scaling", "[vectors][vector basics]") {
+TEST_CASE("Vector scaling", "[vectors][vector basics][Vec3]") {
     // Test the unit vectors
     REQUIRE_THAT(length( 2.0f * Vec3::unit_x), WithinAbs(2.0f, epsilon));
     REQUIRE_THAT(length(-2.0f * Vec3::unit_y), WithinAbs(2.0f, epsilon));

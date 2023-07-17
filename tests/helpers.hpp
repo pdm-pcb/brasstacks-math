@@ -9,8 +9,24 @@
 
 static uint32_t constexpr TEST_REPEATS = 10u;
 
+inline auto random_vec2(float const min = -10.0f, float const max = 10.0f) {
+    return btx::math::Vec2(
+        Catch::Generators::random(min, max).get(),
+        Catch::Generators::random(min, max).get()
+    );
+}
+
 inline auto random_vec3(float const min = -10.0f, float const max = 10.0f) {
     return btx::math::Vec3(
+        Catch::Generators::random(min, max).get(),
+        Catch::Generators::random(min, max).get(),
+        Catch::Generators::random(min, max).get()
+    );
+}
+
+inline auto random_vec4(float const min = -10.0f, float const max = 10.0f) {
+    return btx::math::Vec4(
+        Catch::Generators::random(min, max).get(),
         Catch::Generators::random(min, max).get(),
         Catch::Generators::random(min, max).get(),
         Catch::Generators::random(min, max).get()
