@@ -26,7 +26,7 @@ static uint8_t constexpr print_precs = 8u;
 static uint8_t constexpr print_width = 2u * print_precs + 2u;
 
 // General constants
-static float constexpr epsilon = 1.0e-4;
+static float constexpr epsilon = 1.0e-4f;
 static float constexpr pi = std::numbers::pi_v<float>;
 static float constexpr pi_over_one_eighty = pi / 180.0f;
 static float constexpr one_eighty_over_pi = 180.0f / pi;

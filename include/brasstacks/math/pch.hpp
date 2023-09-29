@@ -7,5 +7,6 @@
 #include <limits>
 #include <type_traits>
 #include <cmath>
+#include <numbers>
 
 #endif // BRASSTACKS_MATH_PCH_HPP

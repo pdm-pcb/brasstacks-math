@@ -67,7 +67,7 @@ TEST_CASE("Vector addition", "[vectors][vector basics][Vec3]") {
     REQUIRE((e += a) == c);
 
     // Addition is associative
-    Vec3 const f = a + b + c;
+    Vec3 f = a + b + c;
     REQUIRE((a + b) + c == f);
     REQUIRE(a + (b + c) == f);
 
@@ -85,17 +85,17 @@ TEST_CASE("Vector addition", "[vectors][vector basics][Vec3]") {
 
         REQUIRE(a + b == b + a);
 
-        Vec3 d = a;
-        Vec3 e = b;
+        d = a;
+        e = b;
         REQUIRE((d += b) == c);
         REQUIRE((e += a) == c);
 
-        Vec3 const f = a + b + c;
+        f = a + b + c;
         REQUIRE((a + b) + c == f);
         REQUIRE(a + (b + c) == f);
 
-        Vec3 g = a;
-        Vec3 h = b;
+        g = a;
+        h = b;
         REQUIRE((g += b) + c == f);
         REQUIRE(a + (h += c) == f);
     }

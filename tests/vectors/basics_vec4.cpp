@@ -76,7 +76,7 @@ TEST_CASE("Vector addition", "[vectors][vector basics][Vec4]") {
     REQUIRE((e += a) == c);
 
     // Addition is associative
-    Vec4 const f = a + b + c;
+    Vec4 f = a + b + c;
     REQUIRE((a + b) + c == f);
     REQUIRE(a + (b + c) == f);
 
@@ -94,17 +94,17 @@ TEST_CASE("Vector addition", "[vectors][vector basics][Vec4]") {
 
         REQUIRE(a + b == b + a);
 
-        Vec4 d = a;
-        Vec4 e = b;
+        d = a;
+        e = b;
         REQUIRE((d += b) == c);
         REQUIRE((e += a) == c);
 
-        Vec4 const f = a + b + c;
+        f = a + b + c;
         REQUIRE((a + b) + c == f);
         REQUIRE(a + (b + c) == f);
 
-        Vec4 g = a;
-        Vec4 h = b;
+        g = a;
+        h = b;
         REQUIRE((g += b) + c == f);
         REQUIRE(a + (h += c) == f);
     }

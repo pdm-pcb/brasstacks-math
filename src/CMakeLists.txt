@@ -66,7 +66,7 @@ elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
                 "-ffast-math"   # Gotta go fast
             )
         endif()
-    else()
+    elseif(CMAKE_C_COMPILER MATCHES "cl")
         target_compile_definitions(
             brasstacks_math PUBLIC
             "_CRT_SECURE_NO_WARNINGS" # Ignore "may be unsafe" warnings
@@ -104,8 +104,13 @@ endif()
 
 set_target_properties(
 	brasstacks_math PROPERTIES
+
+    EXPORT_COMPILE_COMMANDS ON
+
 	CXX_STANDARD 20
 	CXX_STANDARD_REQUIRED ON
+
+    CXX_EXTENSIONS OFF
 
 	ARCHIVE_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_SOURCE_DIR}/debug/lib
     LIBRARY_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_SOURCE_DIR}/debug/lib
