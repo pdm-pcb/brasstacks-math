@@ -4,42 +4,44 @@ file(
 )
 file(
     GLOB_RECURSE LIBRARY_HEADERS
-    "${CMAKE_SOURCE_DIR}/include/brasstacks_math/*.hpp"
+    "${CMAKE_SOURCE_DIR}/include/brasstacks/math/*.hpp"
 )
 
+set(LIBRARY_TARGET brasstacks_math)
+
 add_library(
-    brasstacks_math STATIC
+    ${LIBRARY_TARGET} STATIC
 	${LIBRARY_SOURCE}
     ${LIBRARY_HEADERS}
 )
 
 target_include_directories(
-    brasstacks_math PUBLIC
+    ${LIBRARY_TARGET} PUBLIC
     ${CMAKE_SOURCE_DIR}/include/
 )
 
 target_precompile_headers(
-    brasstacks_math PUBLIC
+    ${LIBRARY_TARGET} PUBLIC
     ${CMAKE_SOURCE_DIR}/include/brasstacks/math/pch.hpp
 )
 
 if(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
     target_compile_options(
-        brasstacks_math PUBLIC
-        "-Wall"             # All, extra, and pedantic warnings
+        ${LIBRARY_TARGET} PUBLIC
+        "-Wall" # All, extra, and pedantic warnings
         "-Wextra"
         "-pedantic"
     )
 
     if(CMAKE_BUILD_TYPE MATCHES "Debug")
         target_compile_options(
-            brasstacks_math PUBLIC
+            ${LIBRARY_TARGET} PUBLIC
             "-O0"       # No optimization
             "-ggdb3"    # All the gdb flags
         )
     elseif(CMAKE_BUILD_TYPE MATCHES "Release")
         target_compile_options(
-            brasstacks_math PUBLIC
+            ${LIBRARY_TARGET} PUBLIC
             "-O3"           # Healthy optimization
             "-ffast-math"   # Gotta go fast
         )
@@ -47,42 +49,43 @@ if(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
 elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
     if(CMAKE_C_COMPILER MATCHES "clang")
         target_compile_options(
-            brasstacks_math PUBLIC
-            "-Wall"             # All, extra, and pedantic warnings
+            ${LIBRARY_TARGET} PUBLIC
+            "-Wall" # All, extra, and pedantic warnings
             "-Wextra"
             "-pedantic"
         )
 
         if(CMAKE_BUILD_TYPE MATCHES "Debug")
             target_compile_options(
-                brasstacks_math PUBLIC
+                ${LIBRARY_TARGET} PUBLIC
                 "-O0"       # No optimization
                 "-ggdb3"    # All the gdb flags
             )
         elseif(CMAKE_BUILD_TYPE MATCHES "Release")
             target_compile_options(
-                brasstacks_math PUBLIC
+                ${LIBRARY_TARGET} PUBLIC
                 "-O3"           # Healthy optimization
                 "-ffast-math"   # Gotta go fast
             )
         endif()
     elseif(CMAKE_C_COMPILER MATCHES "cl")
         target_compile_definitions(
-            brasstacks_math PUBLIC
+            ${LIBRARY_TARGET} PUBLIC
             "_CRT_SECURE_NO_WARNINGS" # Ignore "may be unsafe" warnings
             "WIN64"                   # Prefer 64 bit address space
         )
 
         target_compile_options(
-            brasstacks_math PUBLIC
+            ${LIBRARY_TARGET} PUBLIC
             "/nologo"  # Suppress copyright message
             "/W4"	   # Warnin's
             "/wd4312"  # Disable the warning for casting to a larger size
+            "/wd4324"  # Disable the warning for padding due to alignas
         )
 
         if(CMAKE_BUILD_TYPE MATCHES "Debug")
             target_compile_options(
-                brasstacks_math PUBLIC
+                ${LIBRARY_TARGET} PUBLIC
                 "/JMC"      # Just-My-Code
                 "/Zi"		# Debugging information
                 "/RTC1"     # Runtime checks
@@ -93,7 +96,7 @@ elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
             )
         elseif(CMAKE_BUILD_TYPE MATCHES "Release")
             target_compile_options(
-                brasstacks_math PUBLIC
+                ${LIBRARY_TARGET} PUBLIC
                 "/O2"         # Optimization not disabled =D
                 "/fp:fast"    # Gotta go fast
                 "/GS-"        # No buffer overrun checks
@@ -103,14 +106,11 @@ elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
 endif()
 
 set_target_properties(
-	brasstacks_math PROPERTIES
-
-    EXPORT_COMPILE_COMMANDS ON
+	${LIBRARY_TARGET} PROPERTIES
 
 	CXX_STANDARD 20
 	CXX_STANDARD_REQUIRED ON
-
-    CXX_EXTENSIONS OFF
+	CXX_EXTENSIONS OFF
 
 	ARCHIVE_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_SOURCE_DIR}/debug/lib
     LIBRARY_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_SOURCE_DIR}/debug/lib
